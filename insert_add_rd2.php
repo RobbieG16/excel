@@ -1,5 +1,6 @@
 <?php
-
+// Make sure you include the database connection file (conn.php) here
+include_once("conn.php");
 
 /*if(!isset($_SESSION)){
     session_start();
@@ -48,8 +49,7 @@ $task_clean = mysqli_real_escape_string($connect, $tasks[$count]);
 
 // insert_add_rd2.php
 
-// Make sure you include the database connection file (conn.php) here
-include_once("conn.php");
+
 
 // Check if the request is sent using POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -65,8 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   
     // Assuming you have the $connect variable to the database already defined (using mysqli_connect or PDO)
-    //insert.php
-    $connection = mysqli_connect("localhost", "root", "", "phr_infosys");
+
     // Prepare the insert query
     $query = "INSERT INTO per_user_uploads (jobseeker_fname) VALUES ";
 
@@ -78,10 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Combine all the values into the query
     $query .= implode(", ", $values);
 
-    // Perform the database insertion query
-    if (mysqli_query($connection, $query)) {
-        // Data insertion successful
-        echo "Data Inserted Successfully";
+    // Perform the database insertion query using prepared statement
+    $stmt = mysqli_prepare($connection, $query);
+    if ($stmt) {
+      mysqli_stmt_execute($stmt);
+      // Data insertion successful
+      echo "Data Inserted Successfully";
     } else {
         // Data insertion failed
         echo "Error: " . mysqli_error($connection);

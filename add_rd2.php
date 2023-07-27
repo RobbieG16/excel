@@ -219,6 +219,7 @@ div.agency {
     <table class="table table-bordered" id="crud_table">
      <tr>
       <th width="5%">#</th>
+      <th width="5%">RD</th> <!-- New column for RD with 5% width -->
       <th width="8%">First Name</th>
       <th width="8%">Middle Name</th>
       <th width="8%">Last Name</th>
@@ -256,9 +257,12 @@ div.agency {
     }
                 ?>
                 </table>
-            <div align="center">
+            <!--
+                <div align="center">
                 <button type="button" name="save" id="save" class="btn btn-info">Save</button>
             </div>
+
+  -->
             <br />
             <div id="inserted_item_data"></div>
         </div>
@@ -268,30 +272,160 @@ div.agency {
 </html>
 
 <script>
-$(document).ready(function(){
+$(document).ready(function () {
 
-    
-    html_code += "<td contenteditable='true' class='jobseeker_fname'></td>";
-    html_code += "<td contenteditable='true' class='jobseeker_mname'></td>";
-    html_code += "<td contenteditable='true' class='jobseeker_lname'></td>";
-    html_code += "<td contenteditable='true' class='jobtitle'></td>";
-    html_code += "<td contenteditable='true' class='jobtitle2'></td>";
-    html_code += "<td contenteditable='true' class='contact' ></td>";
-    html_code += "<td contenteditable='true' class='contact2'></td>";
-    html_code += "<td contenteditable='true' class='address'></td>";
-    html_code += "<td contenteditable='true' class='email'></td>";
-    html_code += "<td contenteditable='true' class='passport'></td>";
-    html_code += "<td contenteditable='true' class='exp_years'></td>";
-    html_code += "<td contenteditable='true' class='eligibility'></td>";
-    html_code += "<td contenteditable='true' class='skype_id'></td>";
-    html_code += "<td contenteditable='true' class='recruiter'></td>";
-    html_code += "<td><button type='button' name='remove' data-row='row"+count+"' class='btn btn-danger btn-xs remove'>-</button></td>";   
-    html_code += "</tr>";  
-    $('#crud_table').append(html_code);
+  // Function to handle automatic saving when input changes in any cell
+  $('table').on('input', 'td[contenteditable="true"]', function () {
+    var row = $(this).closest('tr');
+    var data = {
+      jobseeker_fname: row.find('.jobseeker_fname').text(),
+      jobseeker_mname: row.find('.jobseeker_mname').text(),
+      jobseeker_lname: row.find('.jobseeker_lname').text(),
+      jobtitle: row.find('.jobtitle').text(),
+      jobtitle2: row.find('.jobtitle2').text(),
+      contact: row.find('.contact').text(),
+      contact2: row.find('.contact2').text(),
+      address: row.find('.address').text(),
+      email: row.find('.email').text(),
+      passport: row.find('.passport').text(),
+      exp_years: row.find('.exp_years').text(),
+      eligibility: row.find('.eligibility').text(),
+      skype_id: row.find('.skype_id').text(),
+      recruiter: row.find('.recruiter').text()
+      // Add other columns as needed...
+    };
+
+    // Send the data to the server for saving
+    $.ajax({
+      url: "insert_add_rd2.php",
+      method: "POST",
+      data: data,
+      success: function (response) {
+        // Handle the response if needed
+        console.log(response);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        // Handle the error if needed
+        console.error(textStatus, errorThrown);
+      }
+    });
+
+    // Check if any row is completely filled, and add a new row if needed
+    var allRows = $('table tr');
+    allRows.each(function () {
+      var row = $(this);
+      var inputs = row.find('td[contenteditable="true"]');
+      var isRowFilled = true;
+
+      inputs.each(function () {
+        if ($(this).text().trim() === '') {
+          isRowFilled = false;
+          return false; // Break out of the loop if any cell is empty
+        }
+      });
+
+      if (isRowFilled && !row.next().length) {
+        saveRowData(row);
+        addNewRow();
+      }
+    });
   });
- 
+
+  // Function to add a new row at the bottom of the table
+  function addNewRow() {
+    var newRow = '<tr>' +
+      '<td><span class="row_number"></span></td>' +
+      '<td><select class="form-control rd_select"><option value="Manpool">Manpool</option><option value="Other Option">Other Option</option></select></td>' +
+      '<td contenteditable="true" class="jobseeker_fname"></td>' +
+      '<td contenteditable="true" class="jobseeker_mname"></td>' +
+      '<td contenteditable="true" class="jobseeker_lname"></td>' +
+      '<td contenteditable="true" class="jobtitle"></td>' +
+      '<td contenteditable="true" class="jobtitle2"></td>' +
+      '<td contenteditable="true" class="contact"></td>' +
+      '<td contenteditable="true" class="contact2"></td>' +
+      '<td contenteditable="true" class="address"></td>' +
+      '<td contenteditable="true" class="email"></td>' +
+      '<td contenteditable="true" class="passport"></td>' +
+      '<td contenteditable="true" class="exp_years"></td>' +  
+      '<td contenteditable="true" class="eligibility"></td>' +
+      '<td contenteditable="true" class="skype_id"></td>' +
+      '<td contenteditable="true" class="recruiter"></td>' +
+      '</tr>';
+    $('table').append(newRow);
+    updateRowNumbers();
+    applyDropdownToRow($('.rd_select:last'));
+  }
+  // Function to apply dropdown to a specific row's "RD" column
+  function applyDropdownToRow(dropdown) {
+    var options = '<option value="Manpool">Manpool</option><option value="Other Option">Other Option</option>';
+    dropdown.html(options);
+  }
+
+  // Function to save the row data to the server (you can customize this as needed)
+  function saveRowData(row) {
+    // Extract and send the data to the server for saving
+    var data = {
+      jobseeker_fname: row.find('.jobseeker_fname').text(),
+      jobseeker_mname: row.find('.jobseeker_mname').text(),
+      jobseeker_lname: row.find('.jobseeker_lname').text(),
+      jobtitle: row.find('.jobtitle').text(),
+      jobtitle2: row.find('.jobtitle2').text(),
+      contact: row.find('.contact').text(),
+      contact2: row.find('.contact2').text(),
+      address: row.find('.address').text(),
+      email: row.find('.email').text(),
+      passport: row.find('.passport').text(),
+      exp_years: row.find('.exp_years').text(),
+      eligibility: row.find('.eligibility').text(),
+      skype_id: row.find('.skype_id').text(),
+      recruiter: row.find('.recruiter').text()
+      // Add other columns as needed...
+    };
+
+    $.ajax({
+      url: "insert_add_rd2.php",
+      method: "POST",
+      data: data,
+      success: function (response) {
+        // Handle the response if needed
+        console.log(response);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        // Handle the error if needed
+        console.error(textStatus, errorThrown);
+      }
+    });
+  }
+
+  // Function to update the row numbers (#)
+  function updateRowNumbers() {
+    var rows = $('table tr');
+    rows.each(function (index) {
+      $(this).find('.row_number').text(index + 1);
+    });
+  }
+
+});
+
 
   /*
+function fetch_item_data(){
+  $.ajax({
+    url:"fetch_add_rd2.php",
+    method:"POST",
+    success:function(data)
+    {
+    $('#inserted_item_data').html(data);
+    }
+  })
+  }
+fetch_item_data();{
+
+});
+ // Function to add a new row at the bottom of the table
+
+
+
   $(document).on('click', '.remove', function(){
   var delete_row = $(this).data("row");
   $('#' + delete_row).remove();
@@ -369,56 +503,9 @@ $(document).ready(function(){
    }
   });
  });
- */
+ 
 
  // Function to handle automatic saving when input changes in any cell
-$('table').on('input', 'td[contenteditable="true"]', function() {
-    var row = $(this).closest('tr');
-    var data = {
-      jobseeker_fname: row.find('.jobseeker_fname').text(),
-      jobseeker_mname: row.find('.jobseeker_mname').text(),
-      jobseeker_lname: row.find('.jobseeker_lname').text(),
-      jobtitle: row.find('.jobtitle').text(),
-      jobtitle2: row.find('.jobtitle2').text(),
-      contact: row.find('.contact').text(),
-      contact2: row.find('.contact2').text(),
-      address: row.find('.address').text(),
-      email: row.find('.email').text(),
-      passport: row.find('.passport').text(),
-      exp_years: row.find('.exp_years').text(),
-      eligibility: row.find('.eligibility').text(),
-      skype_id: row.find('.skype_id').text(),
-      recruiter: row.find('.recruiter').text()
-      // Add other columns as needed...
-    };
+ */
 
-    // Send the data to the server for saving
-$.ajax({
-  url: "insert_add_rd2.php",
-  method: "POST",
-  data: data,
-  success: function(response) {
-    // Handle the response if needed
-  console.log(response);
-  },
-  error: function(jqXHR, textStatus, errorThrown) {
-    // Handle the error if needed
-  console.error(textStatus, errorThrown);
-  }
-    });
-  });
-
-function fetch_item_data(){
-  $.ajax({
-    url:"fetch_add_rd2.php",
-    method:"POST",
-    success:function(data)
-    {
-    $('#inserted_item_data').html(data);
-    }
-  })
-  }
-fetch_item_data();
-
-});
 </script>
