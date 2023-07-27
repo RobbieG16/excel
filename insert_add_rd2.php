@@ -1,66 +1,97 @@
 <?php
-include_once("connections/connection.php");
-include_once("conn.php");
-if(!isset($_SESSION))
-  {
-   session_start();
+
+
+/*if(!isset($_SESSION)){
+    session_start();
   }
 
 
 if(!isset($_SESSION)){
-     session_start();
+      session_start();
 
 error_reporting(0);
 
 }
-
+include_once("conn.php");
 
 if(isset($_SESSION['UserLogin'])){
 
 }
 
-include_once("connections/connection.php");
-$con = connection();
-
-
-
-//insert.php
-$connect = mysqli_connect("localhost", "root", "", "phr_infosys");
-
-
 
 if(isset($_POST["jobseeker_fname"]))
 {
     
- $task = 'task';
- $query = '';
- for($count = 0; $count<count($task); $count++)
- {
+  $tasks = $_POST["task"]; // Assuming "task" is the name of the input field for the tasks in the submitted form.
+
+  $query = '';
+  for($count = 0; $count < count($tasks); $count++)  {
 $login_user_clean = mysqli_real_escape_string($connect, $login_user[$count]);
-$task = mysqli_real_escape_string($connect, $task[$count]);
+$task_clean = mysqli_real_escape_string($connect, $tasks[$count]);
   
-  if($task != '' && $task && $login_user != '')
-  {
-   $query .= '
-   INSERT INTO to_do_list(task) 
-   VALUES("'.$task_clean.'",  "'.$login_user.'" ); 
-   ';
+  if($task != '' && $task && $login_user != '') {
+    $query .= ' INSERT INTO to_do_list(task) VALUES("'.$task_clean.'",  "'.$login_user_clean.'" ); ';
   }
- }
- if($query != '')
- {
-  if(mysqli_multi_query($connect, $query))
-  {
-   echo 'Item Data Inserted';
   }
-  else
+  if($query != '')
   {
-   echo 'Error';
+  if(mysqli_multi_query($connect, $query)){
+    echo 'Item Data Inserted';
+  } else {
+    echo 'Error';
   }
- }
- else
- {
+  } else {
   echo 'All Fields are Required';
- }
+  }
+}*/
+
+
+// insert_add_rd2.php
+
+// Make sure you include the database connection file (conn.php) here
+include_once("conn.php");
+
+// Check if the request is sent using POST method
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Check if the required field is present in the POST data
+  if (isset($_POST["jobseeker_fname"])) {
+    $jobseeker_fname = $_POST["jobseeker_fname"]; // Assuming "jobseeker_fname" contains an array of jobseeker first names.
+
+
+    // Validate and sanitize the data (you can perform additional validation as needed)
+    foreach ($jobseeker_fname as $index => $fname) {
+      $jobseeker_fname[$index] = trim(mysqli_real_escape_string($connection, $fname));
+  }
+
+  
+    // Assuming you have the $connect variable to the database already defined (using mysqli_connect or PDO)
+    //insert.php
+    $connection = mysqli_connect("localhost", "root", "", "phr_infosys");
+    // Prepare the insert query
+    $query = "INSERT INTO per_user_uploads (jobseeker_fname) VALUES ";
+
+    $values = array();
+    foreach ($jobseeker_fname as $fname) {
+        $values[] = "('$fname')";
+    }
+
+    // Combine all the values into the query
+    $query .= implode(", ", $values);
+
+    // Perform the database insertion query
+    if (mysqli_query($connection, $query)) {
+        // Data insertion successful
+        echo "Data Inserted Successfully";
+    } else {
+        // Data insertion failed
+        echo "Error: " . mysqli_error($connection);
+    }
+} else {
+    // Required field not present in the POST data
+    echo "Error: Missing Required Field";
+}
+} else {
+// Invalid request method
+echo "Error: Invalid Request Method";
 }
 ?>

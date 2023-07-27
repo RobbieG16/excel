@@ -42,7 +42,9 @@ body {
 
 }
 
-
+th {
+  text-align: center;background-color:burlywood;
+}
 
 thead {
 
@@ -197,7 +199,7 @@ div.agency {
 
 
 
- <body>
+  <body>
 
 
   <div class="example1"><h3>PHR-INFORMATION SYSTEM V1.0</h3></div>
@@ -216,6 +218,7 @@ div.agency {
    <div class="table-responsive">
     <table class="table table-bordered" id="crud_table">
      <tr>
+      <th width="5%">#</th>
       <th width="8%">First Name</th>
       <th width="8%">Middle Name</th>
       <th width="8%">Last Name</th>
@@ -230,73 +233,71 @@ div.agency {
       <th width="8%">Eligibility</th>
       <th width="8%">Skype ID</th>
       <th width="8%">Encoder</th>
-      
-      <th width="5%"></th>
-     </tr>
-     <tr>
-      <td contenteditable="true" class="jobseeker_fname"></td>
-      <td contenteditable="true" class="jobseeker_mname"></td>
-      <td contenteditable="true" class="jobseeker_lname"></td>
-      <td contenteditable="true" class="jobtitle"></td>
-      <td contenteditable="true" class="jobtitle2"></td>
-      <td contenteditable="true" class="contact"></td>
-      <td contenteditable="true" class="contact2"></td>
-      <td contenteditable="true" class="address"></td>
-      <td contenteditable="true" class="email"></td>
-      <td contenteditable="true" class="passport"></td>
-      <td contenteditable="true" class="exp_years"></td>
-      <td contenteditable="true" class="eligibility"></td>
-      <td contenteditable="true" class="skype_id"></td>
-      <td contenteditable="true" class="recruiter"></td>
-      <td></td>
-     </tr>
-    </table>
-    <div align="right">
-     <button type="button" name="add" id="add" class="btn btn-success btn-xs">+</button>
+      </tr>
+      <?php
+      for ($row = 1; $row <= 50; $row++) {
+        echo '<tr id="row' . $row . '">';
+        echo '<td><span class="row_number">' . $row . '</span></td>';
+        echo '<td contenteditable="true" class="jobseeker_fname"></td>';
+        echo '<td contenteditable="true" class="jobseeker_mname"></td>';
+        echo '<td contenteditable="true" class="jobseeker_lname"></td>';
+        echo '<td contenteditable="true" class="jobtitle"></td>';
+        echo '<td contenteditable="true" class="jobtitle2"></td>';
+        echo '<td contenteditable="true" class="contact"></td>';
+        echo '<td contenteditable="true" class="contact2"></td>';
+        echo '<td contenteditable="true" class="address"></td>';
+        echo '<td contenteditable="true" class="email"></td>';
+        echo '<td contenteditable="true" class="passport"></td>';
+        echo '<td contenteditable="true" class="exp_years"></td>';
+        echo '<td contenteditable="true" class="eligibility"></td>';
+        echo '<td contenteditable="true" class="skype_id"></td>';
+        echo '<td contenteditable="true" class="recruiter"></td>';
+        echo '</tr>';
+    }
+                ?>
+                </table>
+            <div align="center">
+                <button type="button" name="save" id="save" class="btn btn-info">Save</button>
+            </div>
+            <br />
+            <div id="inserted_item_data"></div>
+        </div>
     </div>
-    <div align="center">
-     <button type="button" name="save" id="save" class="btn btn-info">Save</button>
-    </div>
-    <br />
-    <div id="inserted_item_data"></div>
-   </div>
-   
-  </div>
-  <br><br><br><br><br><br><br><br>
- </body>
+    <br><br><br><br><br><br><br><br>
+</body>
 </html>
 
 <script>
 $(document).ready(function(){
- var count = 1;
- $('#add').click(function(){
-  count = count + 1;
-  var html_code = "<tr id='row"+count+"'>";
-   html_code += "<td contenteditable='true' class='jobseeker_fname'></td>";
-   html_code += "<td contenteditable='true' class='jobseeker_mname'></td>";
-   html_code += "<td contenteditable='true' class='jobseeker_lname'></td>";
-   html_code += "<td contenteditable='true' class='jobtitle'></td>";
-   html_code += "<td contenteditable='true' class='jobtitle2'></td>";
-   html_code += "<td contenteditable='true' class='contact' ></td>";
-   html_code += "<td contenteditable='true' class='contact2'></td>";
-   html_code += "<td contenteditable='true' class='address'></td>";
-   html_code += "<td contenteditable='true' class='email'></td>";
-   html_code += "<td contenteditable='true' class='passport'></td>";
-   html_code += "<td contenteditable='true' class='exp_years'></td>";
-   html_code += "<td contenteditable='true' class='eligibility'></td>";
-   html_code += "<td contenteditable='true' class='skype_id'></td>";
-   html_code += "<td contenteditable='true' class='recruiter'></td>";
-   html_code += "<td><button type='button' name='remove' data-row='row"+count+"' class='btn btn-danger btn-xs remove'>-</button></td>";   
-   html_code += "</tr>";  
-   $('#crud_table').append(html_code);
- });
+
+    
+    html_code += "<td contenteditable='true' class='jobseeker_fname'></td>";
+    html_code += "<td contenteditable='true' class='jobseeker_mname'></td>";
+    html_code += "<td contenteditable='true' class='jobseeker_lname'></td>";
+    html_code += "<td contenteditable='true' class='jobtitle'></td>";
+    html_code += "<td contenteditable='true' class='jobtitle2'></td>";
+    html_code += "<td contenteditable='true' class='contact' ></td>";
+    html_code += "<td contenteditable='true' class='contact2'></td>";
+    html_code += "<td contenteditable='true' class='address'></td>";
+    html_code += "<td contenteditable='true' class='email'></td>";
+    html_code += "<td contenteditable='true' class='passport'></td>";
+    html_code += "<td contenteditable='true' class='exp_years'></td>";
+    html_code += "<td contenteditable='true' class='eligibility'></td>";
+    html_code += "<td contenteditable='true' class='skype_id'></td>";
+    html_code += "<td contenteditable='true' class='recruiter'></td>";
+    html_code += "<td><button type='button' name='remove' data-row='row"+count+"' class='btn btn-danger btn-xs remove'>-</button></td>";   
+    html_code += "</tr>";  
+    $('#crud_table').append(html_code);
+  });
  
- $(document).on('click', '.remove', function(){
+
+  /*
+  $(document).on('click', '.remove', function(){
   var delete_row = $(this).data("row");
   $('#' + delete_row).remove();
- });
+  });
  
- $('#save').click(function(){
+  $('#save').click(function(){
   var jobseeker_fname = [];
   var jobseeker_mname = [];
   var jobseeker_lname = [];
@@ -368,19 +369,56 @@ $(document).ready(function(){
    }
   });
  });
- 
- function fetch_item_data()
- {
+ */
+
+ // Function to handle automatic saving when input changes in any cell
+$('table').on('input', 'td[contenteditable="true"]', function() {
+    var row = $(this).closest('tr');
+    var data = {
+      jobseeker_fname: row.find('.jobseeker_fname').text(),
+      jobseeker_mname: row.find('.jobseeker_mname').text(),
+      jobseeker_lname: row.find('.jobseeker_lname').text(),
+      jobtitle: row.find('.jobtitle').text(),
+      jobtitle2: row.find('.jobtitle2').text(),
+      contact: row.find('.contact').text(),
+      contact2: row.find('.contact2').text(),
+      address: row.find('.address').text(),
+      email: row.find('.email').text(),
+      passport: row.find('.passport').text(),
+      exp_years: row.find('.exp_years').text(),
+      eligibility: row.find('.eligibility').text(),
+      skype_id: row.find('.skype_id').text(),
+      recruiter: row.find('.recruiter').text()
+      // Add other columns as needed...
+    };
+
+    // Send the data to the server for saving
+$.ajax({
+  url: "insert_add_rd2.php",
+  method: "POST",
+  data: data,
+  success: function(response) {
+    // Handle the response if needed
+  console.log(response);
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+    // Handle the error if needed
+  console.error(textStatus, errorThrown);
+  }
+    });
+  });
+
+function fetch_item_data(){
   $.ajax({
-   url:"fetch_add_rd2.php",
-   method:"POST",
-   success:function(data)
-   {
+    url:"fetch_add_rd2.php",
+    method:"POST",
+    success:function(data)
+    {
     $('#inserted_item_data').html(data);
-   }
+    }
   })
- }
- fetch_item_data();
- 
+  }
+fetch_item_data();
+
 });
 </script>

@@ -1,7 +1,7 @@
 <?php
 
 //fetch.php
-$connect = mysqli_connect("localhost", "root", "phrwe.xyz2021", "phr_infosys");
+$connect = mysqli_connect("localhost", "root", "", "phr_infosys");
 $output = '';
 
 
