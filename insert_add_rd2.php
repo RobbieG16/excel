@@ -1,6 +1,4 @@
 <?php
-require_once("dbcontroller.php");
-$db_handle = new DBController();
 include_once("connections/connection.php");
 include_once("conn.php");
 if(!isset($_SESSION))
@@ -27,7 +25,7 @@ $con = connection();
 
 
 //insert.php
-$connect = mysqli_connect("localhost", "root", "phrwe.xyz2021", "phr_infosys");
+$connect = mysqli_connect("localhost", "root", "", "phr_infosys");
 
 
 
