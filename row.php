@@ -81,67 +81,67 @@
                                 <div class="avatar-options">
                                     <!-- Add image options for avatar selection -->
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar1">
+                                        <input type="radio" name="avatar" value="1">
                                         <img src="avatars/1.jpg" alt="Avatar 1" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar2">
+                                        <input type="radio" name="avatar" value="2">
                                         <img src="avatars/2.jpg" alt="Avatar 2" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar3">
+                                        <input type="radio" name="avatar" value="3">
                                         <img src="avatars/3.jpg" alt="Avatar 3"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar4">
+                                        <input type="radio" name="avatar" value="4">
                                         <img src="avatars/4.jpg" alt="Avatar 4"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar5">
+                                        <input type="radio" name="avatar" value="5">
                                         <img src="avatars/5.jpg" alt="Avatar 5" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar6">
+                                        <input type="radio" name="avatar" value="6">
                                         <img src="avatars/6.jpg" alt="Avatar 6" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar7">
+                                        <input type="radio" name="avatar" value="7">
                                         <img src="avatars/7.jpg" alt="Avatar 7"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar8">
+                                        <input type="radio" name="avatar" value="8">
                                         <img src="avatars/8.jpg" alt="Avatar 8"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar9">
+                                        <input type="radio" name="avatar" value="9">
                                         <img src="avatars/9.jpg" alt="Avatar 9" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar10">
+                                        <input type="radio" name="avatar" value="10">
                                         <img src="avatars/10.jpg" alt="Avatar 10" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar11">
+                                        <input type="radio" name="avatar" value="11">
                                         <img src="avatars/11.jpg" alt="Avatar 11"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar12">
+                                        <input type="radio" name="avatar" value="12">
                                         <img src="avatars/12.jpg" alt="Avatar 12"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar13">
+                                        <input type="radio" name="avatar" value="13">
                                         <img src="avatars/13.jpg" alt="Avatar 13" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar14">
+                                        <input type="radio" name="avatar" value="14">
                                         <img src="avatars/14.jpg" alt="Avatar 14" style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar15">
+                                        <input type="radio" name="avatar" value="15">
                                         <img src="avatars/15.jpg" alt="Avatar 15"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <label>
-                                        <input type="radio" name="avatar" value="avatar16">
+                                        <input type="radio" name="avatar" value="16">
                                         <img src="avatars/16.jpg" alt="Avatar 16"  style="max-width: 40px; max-height: 40px;">
                                     </label>
                                     <!-- Add more image options as needed -->
